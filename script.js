@@ -1,4 +1,4 @@
-// --- "Auth" functions (using localStorage for demo purposes) ---
+// --- Auth Functions ---
 function getUser() {
     const user = localStorage.getItem('gothamUser');
     return user ? JSON.parse(user) : null;
@@ -29,33 +29,18 @@ function userExists(username) {
 
 // --- Section switching helpers ---
 function showSection(sectionId) {
-    document.getElementById('landing').classList.add('hidden');
-    document.getElementById('login-section').classList.add('hidden');
-    document.getElementById('signup-section').classList.add('hidden');
-    document.getElementById('dashboard-section').classList.add('hidden');
+    ["landing", "login-section", "signup-section", "dashboard-section"].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+    });
     document.getElementById(sectionId).classList.remove('hidden');
 }
 
-// --- Landing page logic ---
-const landingDashboardBtn = document.getElementById('landing-dashboard-btn');
-const landingSignupBtn = document.getElementById('landing-signup-btn');
+// --- Navbar Login/Logout ---
 const navLoginBtn = document.getElementById('nav-login-btn');
-
 function updateNavLoginBtn() {
     const user = getUser();
     navLoginBtn.textContent = user ? `Hi, ${user.username} (Logout)` : "Login";
 }
-updateNavLoginBtn();
-
-landingDashboardBtn.addEventListener('click', () => {
-    const user = getUser();
-    if (user) {
-        showSection('dashboard-section');
-        renderDashboard();
-    } else {
-        showSection('login-section');
-    }
-});
 navLoginBtn.addEventListener('click', () => {
     const user = getUser();
     if (user) {
@@ -64,43 +49,82 @@ navLoginBtn.addEventListener('click', () => {
         showSection('landing');
     } else {
         showSection('login-section');
+        clearLoginForm();
     }
 });
-landingSignupBtn.addEventListener('click', () => {
+updateNavLoginBtn();
+
+// --- Landing page logic ---
+document.getElementById('landing-dashboard-btn').addEventListener('click', () => {
+    const user = getUser();
+    if (user) {
+        showSection('dashboard-section');
+        renderDashboard();
+    } else {
+        showSection('login-section');
+        clearLoginForm();
+    }
+});
+document.getElementById('landing-signup-btn').addEventListener('click', () => {
     showSection('signup-section');
+    clearSignupForm();
 });
 
 // --- Auth forms logic ---
 const loginForm = document.getElementById('login-form');
 const loginCancelBtn = document.getElementById('login-cancel-btn');
 const toSignupBtn = document.getElementById('to-signup-btn');
-const signupForm = document.getElementById('signup-form');
-const signupCancelBtn = document.getElementById('signup-cancel-btn');
-const toLoginBtn = document.getElementById('to-login-btn');
-
+const loginError = document.getElementById('login-error');
+function clearLoginForm() {
+    loginForm.reset();
+    loginError.textContent = "";
+}
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const username = document.getElementById('login-username').value.trim();
     const password = document.getElementById('login-password').value;
+    if (!username || !password) {
+        loginError.textContent = "Please fill in all fields.";
+        return;
+    }
     if (checkUser(username, password)) {
         setUser(username);
         updateNavLoginBtn();
         showSection('dashboard-section');
         renderDashboard();
+        clearLoginForm();
     } else {
-        alert("Invalid username or password.");
+        loginError.textContent = "Invalid username or password.";
     }
 });
-loginCancelBtn.addEventListener('click', () => showSection('landing'));
-toSignupBtn.addEventListener('click', () => showSection('signup-section'));
+loginCancelBtn.addEventListener('click', () => {
+    showSection('landing');
+    clearLoginForm();
+});
+toSignupBtn.addEventListener('click', () => {
+    showSection('signup-section');
+    clearSignupForm();
+});
 
+// Signup
+const signupForm = document.getElementById('signup-form');
+const signupCancelBtn = document.getElementById('signup-cancel-btn');
+const toLoginBtn = document.getElementById('to-login-btn');
+const signupError = document.getElementById('signup-error');
+function clearSignupForm() {
+    signupForm.reset();
+    signupError.textContent = "";
+}
 signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const username = document.getElementById('signup-username').value.trim();
     const password = document.getElementById('signup-password').value;
-    if (!username || !password) return;
+    if (!username || !password) {
+        signupError.textContent = "Please fill in all fields.";
+        return;
+    }
     if (userExists(username)) {
-        alert("Username already exists.");
+        signupError.textContent = "Username already exists.";
         return;
     }
     registerUser(username, password);
@@ -108,11 +132,18 @@ signupForm.addEventListener('submit', (e) => {
     updateNavLoginBtn();
     showSection('dashboard-section');
     renderDashboard();
+    clearSignupForm();
 });
-signupCancelBtn.addEventListener('click', () => showSection('landing'));
-toLoginBtn.addEventListener('click', () => showSection('login-section'));
+signupCancelBtn.addEventListener('click', () => {
+    showSection('landing');
+    clearSignupForm();
+});
+toLoginBtn.addEventListener('click', () => {
+    showSection('login-section');
+    clearLoginForm();
+});
 
-// --- Dashboard logic (unchanged, but add user check) ---
+// --- Dashboard logic (per-user data) ---
 function getDashboardData() {
     const user = getUser();
     if (!user) return [];
@@ -158,14 +189,13 @@ function renderDashboard() {
     });
 }
 
-// Modal form handling
+// Dashboard modal logic
 const modalOverlay = document.getElementById('modal-overlay');
 const createNewBtn = document.getElementById('create-new-btn');
 const cancelBtn = document.getElementById('cancel-btn');
 const dashboardForm = document.getElementById('dashboard-form');
 const titleInput = document.getElementById('dashboard-title');
 const descInput = document.getElementById('dashboard-description');
-
 if (createNewBtn) createNewBtn.addEventListener('click', openModal);
 if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 if (modalOverlay) modalOverlay.addEventListener('click', function(e) {

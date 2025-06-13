@@ -3,6 +3,7 @@ body {
     font-family: 'Montserrat', Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: #e4e4e6;
 }
 .navbar {
     display: flex;
@@ -37,30 +38,47 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 2em;
-    background: linear-gradient(135deg, #191921 70%, #00bfae 180%);
+    background: linear-gradient(135deg, #1e202a 70%, #00bfae 180%);
+    animation: fadeIn 1.2s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-40px);}
+    to { opacity: 1; transform: translateY(0);}
 }
 .landing-content {
-    background: rgba(35,35,43,0.93);
-    border-radius: 18px;
-    padding: 3em 2.5em 2.5em 2.5em;
+    background: rgba(35,35,43,0.96);
+    border-radius: 20px;
+    padding: 3.2em 2.7em 2.2em 2.7em;
     text-align: center;
-    box-shadow: 0 8px 38px #00bfae33;
-    max-width: 480px;
-    margin: 6em auto 0 auto;
+    box-shadow: 0 10px 40px #00bfae33;
+    max-width: 440px;
+    margin: 7em auto 0 auto;
 }
-.fancy-title {
-    font-size: 2.3em;
-    font-weight: 700;
-    color: #e4e4e6;
-    letter-spacing: 1.3px;
-    margin-bottom: 0.7em;
+.logo-glow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5em;
 }
-.highlight {
+.logo-gotham {
+    font-size: 2.8em;
     color: #00bfae;
-    text-shadow: 0 2px 16px #00bfae77;
+    filter: drop-shadow(0 0 32px #00bfae99);
+    animation: logoPulse 2.8s infinite alternate;
+    margin-bottom: 0.2em;
 }
-.fancy-desc {
+@keyframes logoPulse {
+    from { filter: drop-shadow(0 0 32px #00bfae99);}
+    to { filter: drop-shadow(0 0 2px #00bfae);}
+}
+.gotham-text {
+    color: #e4e4e6;
+    font-size: 2.1em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 16px #00bfae30;
+}
+.landing-desc {
     color: #b9b9bd;
     font-size: 1.14em;
     margin-bottom: 2em;
@@ -69,9 +87,10 @@ body {
 .fade-in {
     color: #00bfae;
     font-weight: 700;
-    opacity: 0.93;
+    opacity: 0.96;
     display: block;
     margin-top: 0.6em;
+    letter-spacing: 0.2px;
 }
 .landing-actions {
     display: flex;
@@ -81,11 +100,11 @@ body {
 .landing-btn {
     background: #00bfae;
     color: #14151a;
-    font-size: 1.05em;
+    font-size: 1.07em;
     font-weight: 700;
     border: none;
     border-radius: 6px;
-    padding: 0.83em 2.4em;
+    padding: 0.88em 2.2em;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
     font-family: 'Montserrat', Arial, sans-serif;
@@ -116,36 +135,45 @@ body {
 }
 .auth-modal {
     background: #23232b;
-    border-radius: 16px;
+    border-radius: 18px;
     box-shadow: 0 8px 38px #00bfae33;
-    padding: 2em 2.5em 1.5em 2.5em;
+    padding: 2.3em 2.5em 1.5em 2.5em;
     min-width: 320px;
-    max-width: 90vw;
+    max-width: 92vw;
 }
 .auth-modal h2 {
     color: #00bfae;
     font-weight: 700;
     margin-top: 0;
-    margin-bottom: 0.8em;
+    margin-bottom: 1em;
     text-align: center;
+    letter-spacing: 0.7px;
 }
-.auth-modal label {
-    color: #e4e4e6;
-    font-weight: 600;
-    margin-top: 0.6em;
-    display: block;
-    margin-bottom: 0.2em;
+.form-group {
+    margin-bottom: 1.1em;
 }
 .auth-modal input {
     width: 100%;
     padding: 0.7em;
-    margin-bottom: 1em;
     border-radius: 5px;
     border: 1px solid #343448;
     background: #18181f;
     color: #e4e4e6;
     font-size: 1em;
     font-family: 'Montserrat', Arial, sans-serif;
+    margin-bottom: 2px;
+}
+.auth-modal input::placeholder {
+    color: #b9b9bd;
+    opacity: 1;
+}
+.form-error {
+    color: #e74c3c;
+    font-size: 0.97em;
+    min-height: 1.5em;
+    margin-bottom: 0.6em;
+    text-align: center;
+    letter-spacing: 0.1px;
 }
 .auth-switch, .auth-switch .link-btn {
     color: #00bfae;
@@ -172,14 +200,15 @@ body {
     color: #01a394;
     text-decoration: underline;
 }
-/* Dashboard and Modals (as before) */
+/* Dashboard and Modals */
 .dashboard-container {
     background: #23232b;
     max-width: 480px;
     margin: 60px auto;
     padding: 2em 2.5em 2.5em 2.5em;
-    border-radius: 16px;
+    border-radius: 18px;
     box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+    color: #e4e4e6;
 }
 #dashboard-section {
     min-height: 100vh;
@@ -189,6 +218,7 @@ body {
     align-items: stretch;
     background: linear-gradient(135deg, #191921 70%, #00bfae 180%);
     padding-top: 2em;
+    color: #e4e4e6;
 }
 .dashboard-container h1 {
     text-align: center;
@@ -235,6 +265,7 @@ body {
     cursor: pointer;
     position: relative;
     transition: box-shadow 0.2s, border 0.2s;
+    color: #e4e4e6;
 }
 .dashboard-item-frame:hover {
     box-shadow: 0 4px 22px #00bfae33;
@@ -283,6 +314,7 @@ body {
     max-width: 90vw;
     box-shadow: 0 6px 32px rgba(0,0,0,0.6);
     font-family: 'Montserrat', Arial, sans-serif;
+    color: #e4e4e6;
 }
 .modal h2 {
     margin-top: 0;
@@ -309,6 +341,11 @@ body {
     font-size: 1em;
     font-family: 'Montserrat', Arial, sans-serif;
     resize: none;
+}
+.modal input::placeholder,
+.modal textarea::placeholder {
+    color: #b9b9bd;
+    opacity: 1;
 }
 .modal-actions {
     display: flex;

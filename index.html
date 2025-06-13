@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fancy Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Gotham font substitute via Montserrat from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Dashboard</h1>
+        <button id="create-new-btn">+ Create New</button>
+        <div id="dashboard-list"></div>
+    </div>
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Add New Item</h2>
+            <form id="dashboard-form">
+                <label for="dashboard-title">Title</label>
+                <input type="text" id="dashboard-title" placeholder="Title" required>
+                <label for="dashboard-description">Description</label>
+                <textarea id="dashboard-description" placeholder="Description" required></textarea>
+                <div class="modal-actions">
+                    <button type="submit" class="modal-btn add-btn">Add</button>
+                    <button type="button" id="cancel-btn" class="modal-btn cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="item-modal-overlay" class="modal-overlay hidden">
+        <div class="modal item-modal">
+            <h2 id="item-modal-title"></h2>
+            <p id="item-modal-description"></p>
+            <div class="modal-actions">
+                <button type="button" id="close-item-modal-btn" class="modal-btn cancel-btn">Close</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

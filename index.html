@@ -2,93 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome | Fancy Dashboard</title>
+    <title>Gotham Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Gotham font substitute via Montserrat from Google Fonts -->
+    <!-- Gotham substitute via Montserrat -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar">
-        <button id="nav-login-btn" class="nav-btn">Login</button>
+        <button id="nav-login-btn" class="nav-btn"></button>
     </nav>
-    <section id="landing" class="landing-section">
-        <div class="landing-content">
-            <h1 class="fancy-title">Welcome to <span class="highlight">Gotham Dashboard</span></h1>
-            <p class="fancy-desc">
-                Organize your ideas, tasks, and notes with style.<br>
-                Your private, sleek dashboard experience, right in your browser.<br>
-                <span class="fade-in">No data leaves your device.</span>
-            </p>
-            <div class="landing-actions">
-                <button id="landing-dashboard-btn" class="landing-btn">Go to Dashboard</button>
-                <button id="landing-signup-btn" class="landing-btn secondary">Sign Up</button>
+    <main>
+        <section id="landing" class="landing-section">
+            <div class="landing-content">
+                <div class="logo-glow">
+                    <span class="logo-gotham">🦇</span>
+                    <span class="gotham-text">Gotham Dashboard</span>
+                </div>
+                <p class="landing-desc">
+                    <span class="fade-in">Organize your tasks, ideas, and notes in true Gotham style.<br>
+                    Secure. Stylish. Local to your device.</span>
+                </p>
+                <div class="landing-actions">
+                    <button id="landing-dashboard-btn" class="landing-btn">Dashboard</button>
+                    <button id="landing-signup-btn" class="landing-btn secondary">Sign Up</button>
+                </div>
             </div>
-        </div>
-    </section>
-    <section id="login-section" class="hidden auth-section">
-        <div class="auth-modal">
-            <h2>Login</h2>
-            <form id="login-form">
-                <label for="login-username">Username</label>
-                <input id="login-username" required>
-                <label for="login-password">Password</label>
-                <input id="login-password" type="password" required>
-                <div class="modal-actions">
-                    <button type="submit" class="modal-btn add-btn">Login</button>
-                    <button type="button" id="login-cancel-btn" class="modal-btn cancel-btn">Cancel</button>
-                </div>
-            </form>
-            <p class="auth-switch">No account? <button type="button" id="to-signup-btn" class="link-btn">Sign Up</button></p>
-        </div>
-    </section>
-    <section id="signup-section" class="hidden auth-section">
-        <div class="auth-modal">
-            <h2>Sign Up</h2>
-            <form id="signup-form">
-                <label for="signup-username">Username</label>
-                <input id="signup-username" required>
-                <label for="signup-password">Password</label>
-                <input id="signup-password" type="password" required>
-                <div class="modal-actions">
-                    <button type="submit" class="modal-btn add-btn">Sign Up</button>
-                    <button type="button" id="signup-cancel-btn" class="modal-btn cancel-btn">Cancel</button>
-                </div>
-            </form>
-            <p class="auth-switch">Already have an account? <button type="button" id="to-login-btn" class="link-btn">Login</button></p>
-        </div>
-    </section>
-    <section id="dashboard-section" class="hidden">
-        <div class="dashboard-container">
-            <h1>Dashboard</h1>
-            <button id="create-new-btn">+ Create New</button>
-            <div id="dashboard-list"></div>
-        </div>
-        <div id="modal-overlay" class="modal-overlay hidden">
-            <div class="modal">
-                <h2>Add New Item</h2>
-                <form id="dashboard-form">
-                    <label for="dashboard-title">Title</label>
-                    <input type="text" id="dashboard-title" placeholder="Title" required>
-                    <label for="dashboard-description">Description</label>
-                    <textarea id="dashboard-description" placeholder="Description" required></textarea>
+        </section>
+
+        <section id="login-section" class="hidden auth-section">
+            <div class="auth-modal">
+                <h2>Login</h2>
+                <form id="login-form" autocomplete="off">
+                    <div class="form-group">
+                        <input id="login-username" placeholder="Username" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <input id="login-password" type="password" placeholder="Password" required autocomplete="current-password">
+                    </div>
+                    <div id="login-error" class="form-error"></div>
                     <div class="modal-actions">
-                        <button type="submit" class="modal-btn add-btn">Add</button>
-                        <button type="button" id="cancel-btn" class="modal-btn cancel-btn">Cancel</button>
+                        <button type="submit" class="modal-btn add-btn">Login</button>
+                        <button type="button" id="login-cancel-btn" class="modal-btn cancel-btn">Cancel</button>
                     </div>
                 </form>
+                <p class="auth-switch">No account? <button type="button" id="to-signup-btn" class="link-btn">Sign Up</button></p>
             </div>
-        </div>
-        <div id="item-modal-overlay" class="modal-overlay hidden">
-            <div class="modal item-modal">
-                <h2 id="item-modal-title"></h2>
-                <p id="item-modal-description"></p>
-                <div class="modal-actions">
-                    <button type="button" id="close-item-modal-btn" class="modal-btn cancel-btn">Close</button>
+        </section>
+
+        <section id="signup-section" class="hidden auth-section">
+            <div class="auth-modal">
+                <h2>Sign Up</h2>
+                <form id="signup-form" autocomplete="off">
+                    <div class="form-group">
+                        <input id="signup-username" placeholder="Username" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <input id="signup-password" type="password" placeholder="Password" required autocomplete="new-password">
+                    </div>
+                    <div id="signup-error" class="form-error"></div>
+                    <div class="modal-actions">
+                        <button type="submit" class="modal-btn add-btn">Sign Up</button>
+                        <button type="button" id="signup-cancel-btn" class="modal-btn cancel-btn">Cancel</button>
+                    </div>
+                </form>
+                <p class="auth-switch">Already have an account? <button type="button" id="to-login-btn" class="link-btn">Login</button></p>
+            </div>
+        </section>
+
+        <section id="dashboard-section" class="hidden">
+            <div class="dashboard-container">
+                <h1>Dashboard</h1>
+                <button id="create-new-btn">+ Create New</button>
+                <div id="dashboard-list"></div>
+            </div>
+            <div id="modal-overlay" class="modal-overlay hidden">
+                <div class="modal">
+                    <h2>Add New Item</h2>
+                    <form id="dashboard-form">
+                        <label for="dashboard-title">Title</label>
+                        <input type="text" id="dashboard-title" placeholder="Title" required>
+                        <label for="dashboard-description">Description</label>
+                        <textarea id="dashboard-description" placeholder="Description" required></textarea>
+                        <div class="modal-actions">
+                            <button type="submit" class="modal-btn add-btn">Add</button>
+                            <button type="button" id="cancel-btn" class="modal-btn cancel-btn">Cancel</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-    </section>
+            <div id="item-modal-overlay" class="modal-overlay hidden">
+                <div class="modal item-modal">
+                    <h2 id="item-modal-title"></h2>
+                    <p id="item-modal-description"></p>
+                    <div class="modal-actions">
+                        <button type="button" id="close-item-modal-btn" class="modal-btn cancel-btn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>

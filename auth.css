@@ -1,0 +1,101 @@
+body {
+    background: #f2f5f8;
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #23232b;
+}
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #d7e7ef 70%, #00bfae 180%);
+}
+.auth-modal {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 38px #00bfae33;
+    padding: 2.3em 2.5em 1.5em 2.5em;
+    min-width: 320px;
+    max-width: 92vw;
+}
+.auth-modal h2 {
+    color: #00bfae;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1em;
+    text-align: center;
+    letter-spacing: 0.7px;
+}
+.form-group {
+    margin-bottom: 1.1em;
+}
+.auth-modal input {
+    width: 100%;
+    padding: 0.7em;
+    border-radius: 5px;
+    border: 1px solid #343448;
+    background: #f7fafd;
+    color: #23232b;
+    font-size: 1em;
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin-bottom: 2px;
+}
+.auth-modal input::placeholder {
+    color: #8b949e;
+    opacity: 1;
+}
+.form-error {
+    color: #e74c3c;
+    font-size: 0.97em;
+    min-height: 1.5em;
+    margin-bottom: 0.6em;
+    text-align: center;
+    letter-spacing: 0.1px;
+}
+.auth-switch, .auth-switch .link-btn {
+    color: #00bfae;
+    text-align: center;
+    font-size: 0.97em;
+    background: none;
+    border: none;
+    margin-top: 1em;
+    font-family: 'Montserrat', Arial, sans-serif;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+}
+.link-btn {
+    color: #00bfae;
+    background: none;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+}
+.link-btn:hover {
+    color: #019c8d;
+    text-decoration: underline;
+}
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+.modal-btn {
+    padding: 0.6em 1.4em;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    background: #00bfae;
+    color: #fff;
+}
+.modal-btn:hover {
+    background: #019c8d;
+}

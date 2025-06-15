@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Gotham Dashboard</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <nav class="navbar">
+        <span id="username-greeting"></span>
+        <button id="nav-logout-btn" class="nav-btn">Logout</button>
+    </nav>
+    <section id="dashboard-section">
+        <div class="dashboard-container">
+            <h1>Dashboard</h1>
+            <p>Welcome to Gotham, <span id="username-inline"></span>!</p>
+            <!-- Add your dashboard content here -->
+        </div>
+    </section>
+    <script>
+    // Check session and greet user
+    fetch('http://localhost:3000/api/session', { credentials: 'include' })
+    .then(res => res.json().then(data => ({ ok: res.ok, data })))
+    .then(r => {
+        if (r.ok && r.data.username) {
+            document.getElementById('username-greeting').textContent = `Hi, ${r.data.username}!`;
+            document.getElementById('username-inline').textContent = r.data.username;
+        } else {
+            window.location.href = 'login.html';
+        }
+    });
+
+    // Logout
+    document.getElementById('nav-logout-btn').onclick = function() {
+        fetch('http://localhost:3000/api/logout', {
+            method: 'POST',
+            credentials: 'include'
+        }).then(() => window.location.href = 'login.html');
+    };
+    </script>
+</body>
+</html>

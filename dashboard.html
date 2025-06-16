@@ -1,34 +1,75 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Dashboard</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h2>Dashboard</h2>
-    <p id="welcome">Welcome to your dashboard!</p>
-    <button onclick="logout()">Logout</button>
-    <script>
-      // Fetch user info and show username
-      fetch("/api/user")
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.user && data.user.username) {
-            document.getElementById(
-              "welcome"
-            ).textContent = `Welcome, ${data.user.username}!`;
-          }
-        });
+<head>
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Dashboard</h2>
+  <p id="welcome">Welcome to your dashboard!</p>
+  <button onclick="logout()">Logout</button>
 
-      function logout() {
-        fetch("/api/logout", { method: "POST" }).then(
-          () => (window.location.href = "/login.html")
-        );
+  <div class="dashboard-container" id="productGrid">
+    <!-- Product cards will be inserted here -->
+  </div>
+
+  <script>
+    // Sample product data
+    const products = [
+      {
+        title: "Wireless Headphones",
+        price: "$99.99",
+        img: "https://images.unsplash.com/photo-1512314889357-e157c22f938d?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        title: "Smart Watch",
+        price: "$199.99",
+        img: "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        title: "DSLR Camera",
+        price: "$599.99",
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        title: "Gaming Mouse",
+        price: "$49.99",
+        img: "https://images.unsplash.com/photo-1587825140708-03ad839a3656?auto=format&fit=crop&w=400&q=80"
       }
-    </script>
-  </body>
+    ];
+
+    // Fetch user info and show username
+    fetch("/api/user")
+      .then(res => res.json())
+      .then(data => {
+        if (data.user && data.user.username) {
+          document.getElementById("welcome").textContent = `Welcome, ${data.user.username}!`;
+        }
+      });
+
+    // Render product cards
+    function renderProducts() {
+      const container = document.getElementById("productGrid");
+      products.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img class="product-image" src="${p.img}" alt="${p.title}" />
+          <div class="product-title">${p.title}</div>
+          <div class="product-price">${p.price}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    renderProducts();
+
+    function logout() {
+      fetch("/api/logout", { method: "POST" }).then(() => {
+        window.location.href = "/login.html";
+      });
+    }
+  </script>
+</body>
 </html>

@@ -2,19 +2,29 @@
 <html>
 <head>
   <title>Sign Up</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h2>Sign Up</h2>
   <form id="signupForm">
-    <input type="text" id="username" placeholder="Username" required /><br>
-    <input type="email" id="email" placeholder="Email" required /><br>
-    <input type="password" id="password" placeholder="Password" required /><br>
+    <input type="text" id="username" placeholder="Username" required /><br />
+    <input type="email" id="email" placeholder="Email" required /><br />
+    <div class="password-wrapper">
+      <input type="password" id="password" placeholder="Password" required />
+      <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+    </div>
     <button type="submit">Sign Up</button>
     <div id="error"></div>
   </form>
   <a href="login.html">Login</a>
+
   <script src="main.js"></script>
+  <script>
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+  </script>
 </body>
 </html>
